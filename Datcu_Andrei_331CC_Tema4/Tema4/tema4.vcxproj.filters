@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="lab_glut.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="MainWindow.cpp" />
+    <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="ShaderLoader.cpp" />
+    <ClCompile Include="ParticleSystem.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="lab_camera.hpp" />
+    <ClInclude Include="lab_glut_support.hpp" />
+    <ClInclude Include="lab_shader_loader.hpp" />
+    <ClInclude Include="lab_glut.hpp" />
+    <ClInclude Include="MainWindow.h" />
+    <ClInclude Include="Mesh.h" />
+    <ClInclude Include="lab_mesh_loader.hpp" />
+    <ClInclude Include="lab_texture_loader.hpp" />
+    <ClInclude Include="ShaderLoader.h" />
+    <ClInclude Include="ParticleSystem.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shadere\shader_fragment.glsl">
+      <Filter>shadere</Filter>
+    </None>
+    <None Include="shadere\shader_vertex.glsl">
+      <Filter>shadere</Filter>
+    </None>
+    <None Include="shadere\particle_update_shader_vertex.glsl">
+      <Filter>shadere</Filter>
+    </None>
+    <None Include="shadere\particle_update_shader_geometry.glsl">
+      <Filter>shadere</Filter>
+    </None>
+    <None Include="shadere\particle_billboard_shader_geometry.glsl">
+      <Filter>shadere</Filter>
+    </None>
+    <None Include="shadere\particle_billboard_shader_vertex.glsl">
+      <Filter>shadere</Filter>
+    </None>
+    <None Include="shadere\particle_billboard_shader_fragment.glsl">
+      <Filter>shadere</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="shadere">
+      <UniqueIdentifier>{85857cd0-0cc3-4e79-8578-ea2e16cc1d74}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

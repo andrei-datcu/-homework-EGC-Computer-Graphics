@@ -1,0 +1,118 @@
+README TEMA3 EGC
+
+Nume: Datcu Andrei Daniel
+Grupa: 331CC
+
+1. Cerinta
+
+O animatie si un sistem de particule ca in fisierul .avi prezentat ca exemplu
+
+2. Utilizare
+
+Arhiva contine o solutie MSVC 2012. Aplicatia poate fi rulata in modul debug.
+Singura interactiune intre user si aplicatie se face prin intermediul tastelor
+
+SPACE - Trezeste fata/Adoarme fata
+
+Tasta este inactiva pe durata animatiilor (aka trebuie sa fie complet treaza
+	sau complet adormita pentru ca tasta sa mearga)
+
+
+3. Implementare
+
+Platforma: Windows 7
+IDE Folosit: Microsoft Visual Studio 2012 Ultimate v 11.0.50727.1 RTMREL
+Compilator: MSVC 2012 (vezi IDE)
+
+Dependente:
+	FreeGlut
+	GLEW
+
+Tema are ca baza codul de la laboratorul 8 (cel cu texturare)
+
+Modificarile aduse de mine acestui schelet sunt:
+	- Am externalizat clasa MainWindow (corespunzatoare clasei Laborator)
+	- Am separat implementarea de declararea lab_glut.hpp
+	- Am adaugat clasa ShaderLoader pentru incarcarea shadere-lor. (Vezi comentarii fisier pentru detalii)
+	
+	
+TOATE formele desenate pe ecran sunt la baza Mesh. Mesh este o clasa ce inglobeaza
+ un vao, un ibo si 2 vbo-uri(pozitii, normale si coordonate in textura) pentru obiectul curent
+ si pentru obiectul urmator.
+ Textura este tinuta minte static, fiind aceeasi pentru toate mesele.
+ 
+ Shadere: Tema contine 3 seturi de shadere
+ 
+ 1) shader_fragment.glsl si shader_vertex.glsl:
+		Folosite in clasa MainWindow pentru randarea animatiei din cerinta. Interpolarea se face in shader_vertex.glsl
+
+ 2) particle_update_shader_vertex.glsl si particle_update_shader_geometry.glsl:
+		Folosite in clasa ParticleSystem pentru generarea si updatarea particulelor (doar centrele) folosind TransformFeedback
+
+ 3) particle_billboard_shader_vertex.glsl, particle_billboard_shader_geometry.glsl si particle_billboard_shader_fragment.glsl:
+		genereaza billboardul in functie de centrul sau (in view-space), apoi il trece in projection space, si il textureaza cu alpha-discard
+		
+
+Functionarea animatiei:
+     
+	 - Se incarca ca la laborator meshele
+	 - Fiecare mesha, va bindui la propriul vao un vbo al meshei care ii urmeaza in animatie si va trimite aceste atribute pe pipeurile 3 si 4
+	 - Vertex shaderul interpoleaza si trimite la fragment shader pentru texturare
+	 
+Functionarea particulelor:
+
+	 - Sistemul de particule va tine 2 buffere separate pe care le va interschimba la fiecare cadru randat (pe unul se va aplica Transform Feedback,
+			din celelalt se vor randa particulele)
+     - Exista o particula generator (cu pozitie constanta, transmisa ca parametru a metodei init. La stagiul de updatare/ daca dau de particula generator
+	    generez un numar random intre 0 si 8 de noi particule. Avand o pozitie initiala constanta relativ la pozitia particulei generatoare, culoare random
+		si viteza random (Viteza doar pe ox si oy). Daca dau de orice alta particula ii updatez pozitia si viteza. Daca aceasta a iesit din cadru nu o mai scriu
+		in buffer
+		
+	  - Billboarding: Bilboardurile le generez in geometry shadere din coordonatele centrelor memorate cu Transform Feedback  in view-space. Calculez vectorul
+	     de la centrul particulei la centrul camerei (pratic originea). Inmultesc vectorial acest vector cu vectorul up (0,1,0) si obtin directia orizontala a billboardului
+		 Generez dreptunghiul si il trimit in projection space la fragment shader care textureaza cu alpha-discard.
+
+4. Functionalitati:
+
+    - animatia fetei la space
+	- generarea a maxim 10000 de particule pe parcurs (nu toate deodata) cu viteza si culoare random. Particulele dispar cand ies din ecran
+	
+	Bonusuri:
+	
+	- generarea si updatarea particulelor se face pe GPU intr-un geometry shader combinat cu Transform Feedback
+	- Extinderea centrelor particulelor in Bilboarduri se face pe GPU intr-un alt geometry shader (in view-space)
+	- Practic, totul se face pe GPU!
+	
+5. Continutul arhivei:
+		./Tema4
+		|	|
+		|	ParticleSystem.cpp/h clasele ParticleSystem, UpdateShaderLoader si BillboardShaderLoader
+		|	|
+		|	+Mesh.cpp/h clasa Mesh
+		|	|
+		|   +ShaderLoader.cpp/h clasa ShaderLoader
+		|   |
+		|   +MainWindow.cpp/h clasa MainWindows care controleaza practic animatia
+		|   |
+		|	+restul fisierelor din scheletul de laboraor
+		|   |
+		|   |
+		|   +./dependente (folderul unde se gasesc .h .lib si .dll pentru fiecare dependenta)
+		|	|	|
+		|   |   |
+		|   |   + freeglut
+		|   |   |
+		|   |   + glew
+		|   |   |
+		|   |   + glm
+		|   |   |
+		|	|
+		|   +./shadere
+		|   |   |
+		|   |   + cele trei seturi de shadere descrise mai sus
+		|	|
+		|   +./resurse
+		|   |   |
+		|   |   + toate modele si texturile primite
+		|
+		README

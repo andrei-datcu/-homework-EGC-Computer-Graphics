@@ -1,0 +1,91 @@
+README TEMA2 EGC
+
+Nume: Datcu Andrei Daniel
+Grupa: 331CC
+
+1. Cerinta
+
+Un joc 3D wireframe de curse auto cu obstacole
+
+2. Utilizare
+
+Arhiva contine o solutie MSVC 2012. Aplicatia poate fi rulata in modul debug.
+Singura interactiune intre user si aplicatie se face prin intermediul tastelor
+
+SUS - ACCELERARE
+JOS - FRANARE BRUSCA
+STANGA, DREAPTA - miscarea masinei, asa cum este descris in enunt
+SPACE - scoaterea/ascunderea armei de tip burghiu (asa cum este precizat in enunt)
+
+3. Implementare
+
+Platforma: Windows 7
+IDE Folosit: Microsoft Visual Studio 2012 Ultimate v 11.0.50727.1 RTMREL
+Compilator: MSVC 2012 (vezi IDE)
+
+Tema are ca baza codul de la laboratorul 3
+
+Modificarile aduse de mine acestui schelet sunt:
+	- metoda de OnKeyUp corespondenta in glut, pentru a fi chemata la ridicarea degetului de pe tasta - folosita la accelerare
+	
+Algoritmi speciali folositi:
+	- Axis Aligned Bounded Boxes si intersectarea acestora
+	
+TOATE formele desenate pe ecran sunt la baza ComplexObject2D.
+
++----Object3D+--+Obstacle+--------+PyramidObstacle-+
+             |           |            
+             |           +--------+SphereObstacle-+
+			 |			 
+             |	
+             +---+Car	  
+
+							   
+Am mai definit o clasa de context speciale (cel pentru scor)
+
++---Visual2D------+
+                  |
+				  |
+				  +----------StatusVisual2D
+
+	Atat Car cat si Obstacle adauga metode de animatie, si de miscare (inainte inapoi, stanga, dreapta)
+		precum si metode de accelerare
+		
+	Metoda de animatie translateaza si roteste Obiectul conform pozitiei actuale
+	Totodata, in animatia masinii, setez si perspectiva care se afla mereu in spatele masinii!
+	
+	
+	Coliziunile sunt tratate astfel:
+		Pentru fiecare obstacol generez aabb (axis aligned bounding boxes). La fel si pentru masina. Le intersectez 
+		proiectiile pe cele 3 axe.
+		
+	
+	Generarea inamicilor:
+	 Din 0.15 * lungimea soselei. Random cele doua tipuri. Random 1 obiect din 10 este mobil.
+	 
+	Orice inamic se misca spre masina si nu invers!
+	Masina se misca doar stanga si dreapta.  
+	 Mediul se misca accelerat. La fel exista si franare. Aceasta este de 10 ori mai puternica cand este apasata
+	 sageata jos.
+	
+	Miscarea stanga-dreapta se poate realiza doar daca masina este in accelerare, sau are ceva viteza ramasa de la o
+	accelerare anterioara
+	
+4. Functionalitati:
+
+	Tot ce este descris in enunt. Vezi mai sus!
+
+
+5. Continutul arhivei:
+		./Framework
+		|	|
+		|	+fisierele din scheletul de laboraor
+		|
+		|
+		./Objects (folderul unde se afla sursele adaugate de mine)
+		|	|
+		|	+ Cate doua fisiere (.h si .cpp) pentru fiecare clasa din topologia desenata mai sus
+		|	
+		|
+		README
+		main.cpp (sursa care se ocupa de desfasurarea jocului)

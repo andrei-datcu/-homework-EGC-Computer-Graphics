@@ -1,0 +1,111 @@
+﻿Build started 03.11.2013 00:36:26.
+     1>Project "D:\Documents\Documents\grafica\lab2\lab2_ex1_v2\lab2\lab2.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /Idependente /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Framework\Common.cpp Framework\ComplexObject2D.cpp Framework\DrawingWindow.cpp
+         DrawingWindow.cpp
+     1>d:\documents\documents\grafica\lab2\lab2_ex1_v2\lab2\framework\point2d.h(52): warning C4172: returning address of local variable or temporary
+     1>d:\documents\documents\grafica\lab2\lab2_ex1_v2\lab2\framework\object2d.h(23): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\documents\documents\grafica\lab2\lab2_ex1_v2\lab2\framework\drawingwindow.cpp(100): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\documents\documents\grafica\lab2\lab2_ex1_v2\lab2\framework\drawingwindow.cpp(104): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\documents\documents\grafica\lab2\lab2_ex1_v2\lab2\framework\drawingwindow.cpp(164): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\documents\documents\grafica\lab2\lab2_ex1_v2\lab2\framework\drawingwindow.cpp(168): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\documents\documents\grafica\lab2\lab2_ex1_v2\lab2\framework\drawingwindow.cpp(220): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\documents\documents\grafica\lab2\lab2_ex1_v2\lab2\framework\drawingwindow.cpp(423): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\documents\documents\grafica\lab2\lab2_ex1_v2\lab2\framework\drawingwindow.cpp(440): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\documents\documents\grafica\lab2\lab2_ex1_v2\lab2\framework\drawingwindow.cpp(457): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\documents\documents\grafica\lab2\lab2_ex1_v2\lab2\framework\drawingwindow.cpp(474): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\documents\documents\grafica\lab2\lab2_ex1_v2\lab2\framework\drawingwindow.cpp(492): warning C4018: '<' : signed/unsigned mismatch
+         ComplexObject2D.cpp
+     1>d:\documents\documents\grafica\lab2\lab2_ex1_v2\lab2\framework\point2d.h(52): warning C4172: returning address of local variable or temporary
+     1>d:\documents\documents\grafica\lab2\lab2_ex1_v2\lab2\framework\object2d.h(23): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\documents\documents\grafica\lab2\lab2_ex1_v2\lab2\framework\complexobject2d.cpp(23): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\documents\documents\grafica\lab2\lab2_ex1_v2\lab2\framework\complexobject2d.cpp(24): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\documents\documents\grafica\lab2\lab2_ex1_v2\lab2\framework\complexobject2d.cpp(83): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\documents\documents\grafica\lab2\lab2_ex1_v2\lab2\framework\complexobject2d.cpp(168): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\documents\documents\grafica\lab2\lab2_ex1_v2\lab2\framework\complexobject2d.cpp(182): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\program files (x86)\microsoft visual studio 11.0\vc\include\tuple(151): warning C4244: 'initializing' : conversion from 'int' to 'float', possible loss of data
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\tuple(521) : see reference to function template instantiation 'std::_Tuple_val<_Ty>::_Tuple_val<int>(_Other &&)' being compiled
+                 with
+                 [
+                     _Ty=float,
+                     _Other=int
+                 ]
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\tuple(521) : see reference to function template instantiation 'std::_Tuple_val<_Ty>::_Tuple_val<int>(_Other &&)' being compiled
+                 with
+                 [
+                     _Ty=float,
+                     _Other=int
+                 ]
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\tuple(521) : see reference to function template instantiation 'std::tuple<<unnamed-symbol>,_V0_t,_V1_t,_V2_t,_V3_t,_V4_t>::tuple<_Vx0_t,_Vx1_t>(std::tuple<_Vx0_t,_Vx1_t,_V1_t,_V2_t,_V3_t,_V4_t> &&,void **)' being compiled
+                 with
+                 [
+                     <unnamed-symbol>=float,
+                     _V0_t=float,
+                     _V1_t=std::_Nil,
+                     _V2_t=std::_Nil,
+                     _V3_t=std::_Nil,
+                     _V4_t=std::_Nil,
+                     _Vx0_t=int,
+                     _Vx1_t=int
+                 ]
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\tuple(521) : see reference to function template instantiation 'std::tuple<<unnamed-symbol>,_V0_t,_V1_t,_V2_t,_V3_t,_V4_t>::tuple<_Vx0_t,_Vx1_t>(std::tuple<_Vx0_t,_Vx1_t,_V1_t,_V2_t,_V3_t,_V4_t> &&,void **)' being compiled
+                 with
+                 [
+                     <unnamed-symbol>=float,
+                     _V0_t=float,
+                     _V1_t=std::_Nil,
+                     _V2_t=std::_Nil,
+                     _V3_t=std::_Nil,
+                     _V4_t=std::_Nil,
+                     _Vx0_t=int,
+                     _Vx1_t=int
+                 ]
+                 d:\documents\documents\grafica\lab2\lab2_ex1_v2\lab2\framework\complexobject2d.cpp(43) : see reference to function template instantiation 'std::tuple<<unnamed-symbol>,_V0_t,_V1_t>::tuple<Point2D,int,int>(std::tuple<<unnamed-symbol>,int,int,_V2_t,_V3_t,_V4_t,_V5_t,std::_Nil> &&,void **)' being compiled
+                 with
+                 [
+                     <unnamed-symbol>=Point2D,
+                     _V0_t=float,
+                     _V1_t=float,
+                     _V2_t=std::_Nil,
+                     _V3_t=std::_Nil,
+                     _V4_t=std::_Nil,
+                     _V5_t=std::_Nil
+                 ]
+                 d:\documents\documents\grafica\lab2\lab2_ex1_v2\lab2\framework\complexobject2d.cpp(43) : see reference to function template instantiation 'std::tuple<<unnamed-symbol>,_V0_t,_V1_t>::tuple<Point2D,int,int>(std::tuple<<unnamed-symbol>,int,int,_V2_t,_V3_t,_V4_t,_V5_t,std::_Nil> &&,void **)' being compiled
+                 with
+                 [
+                     <unnamed-symbol>=Point2D,
+                     _V0_t=float,
+                     _V1_t=float,
+                     _V2_t=std::_Nil,
+                     _V3_t=std::_Nil,
+                     _V4_t=std::_Nil,
+                     _V5_t=std::_Nil
+                 ]
+         Common.cpp
+     1>d:\documents\documents\grafica\lab2\lab2_ex1_v2\lab2\framework\point2d.h(52): warning C4172: returning address of local variable or temporary
+         Generating Code...
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Documents\Documents\grafica\lab2\lab2_ex1_v2\Debug\lab2.exe" /INCREMENTAL /NOLOGO /LIBPATH:dependente freeglut.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\Documents\Documents\grafica\lab2\lab2_ex1_v2\Debug\lab2.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Documents\Documents\grafica\lab2\lab2_ex1_v2\Debug\lab2.lib" /MACHINE:X86 Debug\Common.obj
+         Debug\ComplexObject2D.obj
+         Debug\DrawingWindow.obj
+         Debug\Transform2D.obj
+         Debug\Visual2D.obj
+         Debug\main.obj
+         Debug\ArrowEnemy.obj
+         Debug\Bonus.obj
+         Debug\CircularSawEnemy.obj
+         Debug\Enemy.obj
+         Debug\GameFieldVisual2D.obj
+         Debug\LifeBonus.obj
+         Debug\ShieldBonus.obj
+         Debug\ship.obj
+         Debug\SquareInSquareEnemy.obj
+         Debug\StatusVisual2D.obj
+         Debug\TwoSquaresEnemy.obj
+         lab2.vcxproj -> D:\Documents\Documents\grafica\lab2\lab2_ex1_v2\Debug\lab2.exe
+     1>Done Building Project "D:\Documents\Documents\grafica\lab2\lab2_ex1_v2\lab2\lab2.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:03.64

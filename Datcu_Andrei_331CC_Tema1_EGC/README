@@ -1,0 +1,132 @@
+README TEMA1 EGC
+
+Nume: Datcu Andrei Daniel
+Grupa: 331CC
+
+1. Cerinta
+
+Un joc de Geomtry Wars
+
+2. Utilizare
+
+Arhiva contine o solutie MSVC 2012. Aplicatia poate fi rulata in modul debug.
+Singura interactiune intre user si aplicatie se face prin intermediul tastelor
+
+SUS, STANGA, DREAPTA - miscarea navei, asa cum este descris in enunt
+SPACE - scoaterea/ascunderea armei de tip burghiu (asa cum este precizat in enunt)
+
+3. Implementare
+
+Platforma: Windows 7
+IDE Folosit: Microsoft Visual Studio 2012 Ultimate v 11.0.50727.1 RTMREL
+Compilator: MSVC 2012 (vezi IDE)
+
+Tema are ca baza codul de la laboratorul 2 (lab2-ex1-v2)
+
+Modificarile aduse de mine acestui schelet sunt:
+	- adaugarea in DrawingWindow a metodei drawComplexObjects(Visual2D *v) (vezi mai jos)
+	- renuntarea la metodele de add sau remove obiecte din DrawingWindow si adaugarea acestora
+	direct in clasa Visual2D - pentru a face codul mai usor de citit
+	- adaugat lineWidth la 4
+	- fundalul initial in glut este negru cu transparenta 0
+	- metoda de OnKeyUp corespondenta in glut, pentru a fi chemata la ridicarea degetului de pe tasta - folosita la accelerare
+	- La Point2D am adaugat operatorii + si ==
+
+Algoritmi speciali folositi:
+	- Scanarea Graham pentru calcularea infasuratoarei convexe
+	
+TOATE formele desenate pe ecran sunt la baza ComplexObject2D.
+
++--ComplexObject2D+----+Enemy+--------+ArrowEnemy-+
+             |           |            
+             |           +--------+SquareInSquareEnemy-+
+			 |			 |			 
+             |			 +--------+TwoSquaresEnemy-+
+             +---+Ship	 |
+			 |			 +--------+CircularSawEnemy-+
+			 |
+			 |
+			 |
+			 +---+Bonus--------+-------LifeBonus
+				               |
+							   +-------ShieldBonus
+							   
+Am mai definit doua clase de contexte speciale (cel de joc si cel pentru scor)
+
++---Visual2D-------+----------GameFieldVisual2D
+                   |
+				   +----------StatusVisual2D
+
+	ComplexObject2D este practic un vector de Object2D standard.
+	In plus, el adauga metode de animatie, si de miscare (inainte si circulara)
+	Metoda de animatie translateaza si roteste Obiectul conform pozitiei actuale
+	Fiecare ComplexObject2D are:
+		- viteza liniara/circulara (standard, maxima, si curenta - care poate fi modificata folosind metodele speciale)
+		- infasuratoare convexa (aceasta este translata/rotita o data cu obiectul. Foloseste pentru ciocniri)
+		- un cerc "circumscris" (folosit pentru a determina clar obiectele care nu se pot atinge. Este generat din infasuratoarea convexa)
+		- Un boundary tip dreptunghi in care se poate deplasa si descris de cele 2 puncte: blBoundary si trBoundary (bottomLeft si topRight)
+		- metoda abstracta de define object
+		In principiu, fiecare constructor trebuie sa contina:
+			defineObject();
+			reset();
+		
+		Nu am facut asta din constructorul clasei abstracte din cauza limitarilor C++/ale compilatorului Microsoft
+		
+	Enemy este o clasa abstracta care mosteneste direct ComplexObject2D. In plus de acesta, Enemy are metoda planNextMove().
+	Aceasta isi alege o directie de rotatie (random) si merge inainte la fiecare pas. Daca ajunge langa zid (lucru semnalizat de pozitie cat si de
+	metoda abstracta extraCheckHittingTheWall()) atunci face o intoarcere la 180 de grade si face 20 de miscari doar inainte.
+	
+	Bonus: o clasa abstracta care beneficieaza doar de multimea de Object2D pe care o ofera ComplexObject2D. Acesta va fi intotdeauna fix
+	
+	
+	GameFieldVisual2D se ocupa cu animarea jocului. Verifica daca nava s-a intersectat cu vreun inamic, daca trebuie sa apara/dispara bonusuri,
+	daca perioada de "invincibilitate" a navei a trecut (vezi mai jos la functionalitati). Tine punctajul si vietile ramase.
+	
+	DrawingWindow nu face altceva decat sa cheme metoda de animare a GameFieldVisual2D, sa verifice daca nu cumva jocul s-a terminat pentru a inlocui
+	GameFieldVisual2D cu un alt Visual2D care anunta "GAME OVER". La apasarea unei taste de miscare, se va executa o miscare accelerata. La ridicarea tastei,
+	viteza va fi RESETATA.
+	
+	Common.cpp/ Common.h reprezinta implementarea anumitor functii folosite mai des:
+		- eucDistance = distanta euclidiana intre doua puncte
+		- det = ecuatia generala a dreptei sub forma de determinant
+		- getLineIntersection = verifica daca doua segmente se intersecteaza si unde
+		- generateRandomPointInRect - cum ii spune numele
+		- generateRandomPositionAtMinDistance - genreaza un punct aleator in dreptunghi, care trebuie sa afle la o distanta minima de un alt punct din dreptunghi (aka nava)
+	
+	Coliziunile sunt tratate astfel:
+		Pentru fiecare inamic se verifica daca cercul sau "circumscris" se intersecteaza cu cercul "circumscris al navei". Daca da, se verifica daca infasuratoarele convexe
+		ale celor doua se intersecteaza. Daca da, atunci se verifica daca punctul intersectiei se afla sau nu in arma
+		
+	
+	In principiu, orice obiect care apare in GameFieldVisual2D este creat relativ la latimea Contextului.
+	
+4. Functionalitati:
+
+	- Chestiile de baza descrise in enunt
+	- Viteza maxima liniara cand burghiul este scos este de 2 ori mai mica decat viteza maxima cand burghiul nu este scos.
+	
+	Bonusuri:
+		- miscarea accelerata(cu cat este tinut mai mult apasata tasta, cu atat nava se va deplasa mai repede)
+		- nivele de dificultate (asa numite HEAT). La fiecare nivel mai multi inamici apar concomitent si sunt mai rapizi
+		- la fiecare minut pot aparea, doua, unul sau niciun bonus( Extra Viata sau Invincibilitate)
+		- Invincibilitatea navei: Cand nava este colorata in rosu, ea este invincibila. Orice inamic care este atins va fi distrus (indiferent daca este atins cu arma sau nu).
+		Aceasta invincibilitate dureaza 10 secunde apare in doua feluri (la inceputul unei noi vieti si folosind un bonus)
+		
+	Dusmanii sunt plasati random, la o minDistanceFromShipOfNewEnemy fata de nava. Acestia se misca complet aleator, insa evita de fiecare data intrarea in zid.
+
+5. Continutul arhivei:
+		./Framework
+		|	|
+		|	+ComplexObject2D.cpp/h clasa ComplexObject2D
+		|	|
+		|	+Common.cpp/h functiile common (explicate mai sus)
+		|	|
+		|	+restul fisierelor din scheletul de laboraor
+		|
+		|
+		./Objects (folderul unde se afla majoritatea surselor adaugate de mine)
+		|	|
+		|	+ Cate doua fisiere (.h si .cpp) pentru fiecare clasa din topologia desenata mai sus
+		|	
+		|
+		README
